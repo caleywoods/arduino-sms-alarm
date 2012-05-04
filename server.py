@@ -13,7 +13,7 @@ SERIAL_BAUD = 115200
 # Don"t send more than one message every 30 minutes
 SENSOR_INTERVAL = timedelta(minutes=30)
 
-SMS_FROM = "YOUR TWILIO NUMBER" # Make sure this is a number on telapi.com or you'll get charged extra for spoofing
+SMS_FROM = "YOUR TWILIO NUMBER" # Make sure this is a number on twilio.com
 SMS_TO = "YOUR CELL PHONE NUMBER"
 SMS_BODY = "ALERT! Your Arduino just detected motion!"
 TWILIO_ACCOUNT_SID = "YOUR TWILIO ACCOUNT SID"
@@ -51,14 +51,14 @@ if __name__ == "__main__":
                     last_sent_time = datetime.now()
                     print "Sending SMS..."
 
-                    # Send request to TelAPI to send SMS
+                    # Send request to Twilo to send SMS
                     try:
                         data = {
                             "From": SMS_FROM,
                             "To": SMS_TO,
                             "Body": SMS_BODY,
                         }
-                        requests.post(TWILIO_SMS_URL, data=data, auth=(TELAPI_ACCOUNT_SID, TELAPI_TOKEN))
+                        requests.post(TWILIO_SMS_URL, data=data, auth=(TWILIO_ACCOUNT_SID, TWILIO_TOKEN))
 
                         print "** SMS Sent! **"
 
