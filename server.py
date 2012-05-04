@@ -13,19 +13,19 @@ SERIAL_BAUD = 115200
 # Don"t send more than one message every 30 minutes
 SENSOR_INTERVAL = timedelta(minutes=30)
 
-SMS_FROM = "YOUR TELAPI NUMBER" # Make sure this is a number on telapi.com or you'll get charged extra for spoofing
+SMS_FROM = "YOUR TWILIO NUMBER" # Make sure this is a number on telapi.com or you'll get charged extra for spoofing
 SMS_TO = "YOUR CELL PHONE NUMBER"
 SMS_BODY = "ALERT! Your Arduino just detected motion!"
-TELAPI_ACCOUNT_SID = "YOUR TELAPI ACCOUNT SID"
-TELAPI_TOKEN = "YOUR TELAPI ACCOUNT TOKEN"
+TWILIO_ACCOUNT_SID = "YOUR TWILIO ACCOUNT SID"
+TWILIO_TOKEN = "YOUR TWILIO ACCOUNT TOKEN"
 
-# Try to import TELAPI_ACCOUNT_SID and such from settings_local.py, if it exists
+# Try to import TWILIO_ACCOUNT_SID and such from settings_local.py, if it exists
 try:
     from settings_local import *
 except ImportError:
     pass
 
-TELAPI_SMS_URL = "https://api.telapi.com/2011-07-01/Accounts/%s/SMS/Messages" % TELAPI_ACCOUNT_SID
+TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/%s/SMS/Messages" % TWILIO_ACCOUNT_SID
 
 # Start the server
 if __name__ == "__main__":
@@ -58,7 +58,7 @@ if __name__ == "__main__":
                             "To": SMS_TO,
                             "Body": SMS_BODY,
                         }
-                        requests.post(TELAPI_SMS_URL, data=data, auth=(TELAPI_ACCOUNT_SID, TELAPI_TOKEN))
+                        requests.post(TWILIO_SMS_URL, data=data, auth=(TELAPI_ACCOUNT_SID, TELAPI_TOKEN))
 
                         print "** SMS Sent! **"
 
